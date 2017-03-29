@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import models.Records;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,13 +27,20 @@ public class ListPrenomStreamerTest {
         // Given
         ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
         
-        List<Records> res = listPrenomStreamer.getTop3_2010();
+        List<String> res = listPrenomStreamer.getTop3_2010();
 
-        Function<Records, String> nameFunc = records -> records.getFields().getPrenoms();
-        
-        List<String> nomTop3 = res.stream().map(nameFunc).collect(Collectors.toList());
         // Then
-        assertThat(nomTop3, contains("Kevin", "Brams", "Juan"));
+        assertThat(res, containsInAnyOrder("Kevin", "Brams", "Juan"));
+    }
+
+    @Test
+    public void Top_3_of_best_Girl_name_in_2009() throws Exception {
+        // Given
+        ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
+
+        List<String> resGirl = listPrenomStreamer.getTop3_bestGirl2009();
+        // Then
+        assertThat(resGirl, containsInAnyOrder("Adama", "Victoria", "Liama"));
     }
 
 }
