@@ -3,8 +3,13 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import com.google.gson.Gson;
+import java.util.Comparator;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import models.ParisData;
+import models.Records;
 
 public class ListPrenomStreamer {
 
@@ -30,4 +35,13 @@ public class ListPrenomStreamer {
         return null;
     }
 
+    public List<Records> getTop3_2010() {
+
+        Predicate<Records> pred = record -> record.getFields().getAnnee() == 2010;
+        Stream<Records> streamRecords = this.parisData.getRecords().stream().filter(pred);
+        
+        Comparator<Records> comp = ( record1, record2) -> { return -((Integer)record2.getFields().getNombre()).compareTo(record1.getFields().getNombre());}; 
+        
+        return streamRecords.sorted(comp).limit(3).collect(Collectors.toList());
+    }
 }
