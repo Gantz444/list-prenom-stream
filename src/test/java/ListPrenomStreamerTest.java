@@ -43,4 +43,13 @@ public class ListPrenomStreamerTest {
         assertThat(resGirl, containsInAnyOrder("Adama", "Victoria", "Liama"));
     }
 
+    @Test
+    public void Top_3_of_best_Boy_name_in_2012() throws Exception {
+        // Given
+        ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
+
+        List<String> resGirl = listPrenomStreamer.getTop3_bestBoy2012();
+        // Then
+        assertThat(resGirl, containsInAnyOrder("Jean", "Juan", "Kevin"));
+    }
 }

@@ -54,4 +54,13 @@ public class ListPrenomStreamer {
 
         return streamRecords.sorted(comp).limit(3).map(records -> records.getFields().getPrenoms()).collect(Collectors.toList());
     }
+
+    public List<String> getTop3_bestBoy2012() {
+
+        Stream<Records> streamRecords = this.parisData.getRecords().stream().filter(records -> records.getFields().getAnnee()==2012 && records.getFields().getSexe().equals("M")) ;
+
+        Comparator<Records> comp = ( record1, record2) -> { return -((Integer)record2.getFields().getNombre()).compareTo(record1.getFields().getNombre());};
+
+        return streamRecords.sorted(comp).limit(3).map(records -> records.getFields().getPrenoms()).collect(Collectors.toList());
+    }
 }
