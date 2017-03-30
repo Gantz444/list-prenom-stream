@@ -74,12 +74,32 @@ public class ListPrenomStreamerTest {
     }
 
     @Test
-    public void Top_3_of_worst_Girl_name_in_2009() throws Exception {
+    public void Top_3_of_worst_Girl_name_in_2016() throws Exception {
         // Given
         ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
 
         List<String> resGirl = listPrenomStreamer.getTop5_worst_Girl_2009_2016();
         // Then
         assertThat(resGirl, containsInAnyOrder("Fatim", "Victoria", "Liama"));
+    }
+
+    @Test
+    public void name_by_gendre() throws Exception {
+        // Given
+        ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
+
+        List<String> resGirl = listPrenomStreamer.get_name_by_gendre();
+        // Then
+        assertThat(resGirl, contains("Adama","Victoria","Liama","Victoria","Fatim","Liama"   ,"Ismo","Brams","Juan","Kevin","Juan","Jean","Flo","Kevin","Ethan", "Ismael","Non","Baptiste","Mal","Ibrahim"));
+    }
+
+    @Test
+    public void name_2011() throws Exception {
+        // Given
+        ListPrenomStreamer listPrenomStreamer = new ListPrenomStreamer("liste_des_prenoms_2004_a_2012_short.json");
+
+        List<String> resGirl = listPrenomStreamer.get_name_2011();
+        // Then
+        assertThat(resGirl, contains("HB","SS","FF"));
     }
 }

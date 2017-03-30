@@ -90,4 +90,20 @@ public class ListPrenomStreamer {
 
         return streamRecords.sorted(comp).limit(3).map(records -> records.getFields().getPrenoms()).collect(Collectors.toList());
     }
+
+    public List<String> get_name_by_gendre() {
+
+        Stream<Records> streamRecords = this.parisData.getRecords().stream() ;
+
+        Comparator<Records> comp = ( record1, record2) -> { return -((String)record2.getFields().getSexe()).compareTo(record1.getFields().getSexe());};
+
+        return streamRecords.sorted(comp).map(records -> records.getFields().getPrenoms()).collect(Collectors.toList());
+    }
+
+    public List<String> get_name_2011() {
+
+        Stream<Records> streamRecords = this.parisData.getRecords().stream().filter(records -> records.getFields().getAnnee()==2011) ;
+
+        return streamRecords.map(records -> records.getFields().getPrenoms()).collect(Collectors.toList());
+    }
 }
